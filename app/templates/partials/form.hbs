@@ -1,0 +1,44 @@
+<!-- pad-wrapper -->
+<div id="pad-wrapper" class="form-page">
+
+	<!-- title //-->
+	<div class="row header">
+		<h3>{{title}}</h3>
+	</div>
+
+	<!-- row form-wrapper -->
+  	<div class="row form-wrapper">
+		<div class="col-lg-12 col-md-12 col-sm-12 column">
+
+			{{#each formFields}}
+			{{#compare type "text" operator="==="}}
+		    <div class="field-box">
+	            <label>{{title}}</label>
+	            <div class="{{class}}">
+	                <input class="form-control" type="text" id="{{name}}" placeholder="" />
+	            </div>                      
+	        </div>
+	        {{/compare}}
+	        {{#compare type "selectbox" operator="==="}}
+		    <div class="field-box">
+	            <label>{{title}}</label>
+	            <div class="{{class}}">
+		            <select class="form-control input-sm">
+			          {{#each values}}
+			          <option value="{{this}}">{{this}}</option>
+			          {{/each}}
+			        </select>
+			    </div>	             
+	        </div>
+	        {{/compare}}
+		    {{/each}}
+		    <div class="control-group">
+			    <div class="controls">
+			        <button id="register" class="btn-flat default" >+Add</button>
+			    </div>
+			</div>
+
+		</div>
+	</div>
+
+</div>

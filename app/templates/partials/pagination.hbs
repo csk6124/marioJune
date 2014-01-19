@@ -1,0 +1,13 @@
+<div id="pad-wrapper">
+  <div class="col-lg-12 col-md-12 col-sm-12">   
+  	<ul class="pager">
+		{{#if prev}}
+	        <li><a class="older-posts" href="{{prevUrl}}" title="prev url">&larr;<span>PREV</span></a></li>
+		{{/if}}
+		 <li><span class="page-number">Page {{page}} of {{pages}}</span></li>
+		{{#if next}}
+	        <li><a class="newer-posts" href="{{nextUrl}}" title="next url"><span>NEXT</span> &rarr;</a></li>
+	    {{/if}}
+	</ul>
+ </div>
+</div>

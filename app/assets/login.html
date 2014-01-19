@@ -1,0 +1,130 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>June</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="stylesheets/main.css">
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <style>
+  body {
+	  background: transparent url(../img/bgs/back-orange.png) repeat-x 0 0;
+	}
+  </style>
+  <script>
+    $(function() {
+      $("#userid").focus();
+      document.getElementById("userid").addEventListener("keydown", keyDownTextField, false);
+      document.getElementById("password").addEventListener("keydown", keyDownTextField, false);
+
+      function keyDownTextField (e) {
+        var keyCode = e.keyCode;
+        if(keyCode === 13) {
+          console.log('keyCode', keyCode);
+          login();
+        }
+      }
+
+    });
+
+  	function login() {
+
+      var userid = $("#userid").val()
+      var passwd = $("#password").val()
+
+      if(!userid) {
+        $("#userid").focus();
+        return;
+      }
+      if(!passwd) {
+        $("#password").focus();
+        return;
+      }
+
+  		var datas = {
+  			data: {
+  				"userid": userid,
+  				"password": passwd
+  			}
+  		};
+
+      console.log(datas);
+  		$.ajax({
+  		timeout: 5000,
+		  data: datas.data,
+		  url: 'http://localhost:9000/api/login',
+		  type: 'get',
+		  crossDomain: true,
+		  xhrFields: {
+		    'withCredentials': true
+		  },
+		  dataType: 'json',
+		  contentType: "application/json",
+		  success: function(data, status, jqXHR) {
+		    console.log('success', data.private_key, status);
+        if(data.private_key) {
+          $.cookie('auth_key', data.private_key, { expires: 1, path: '/' })
+          window.location = "/";
+        } else {
+          console.log("dfsdfsfd");
+
+          setTimeout(function() {
+            $("#noti").fadeOut('fast');
+
+          }, 2000);
+
+          $("#noti").html('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>Error!</strong> Invalid Userid or Password</div>');
+          $("#userid").val("");
+          $("#password").val("");
+          $("#userid").focus();
+        }
+       
+		  },
+		  error: function(jqXHR, status) {
+		    console.log('error', status);
+        setTimeout(function() {
+            $("#noti").fadeOut('fast');
+
+        }, 2000);
+
+        $("#noti").html('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><strong>Error!</strong> Invalid Userid or Password</div>');
+
+        $("#userid").val("");
+        $("#password").val("");
+        $("#userid").focus();
+		  }
+		});
+  	}
+  </script>
+</head>
+<body>
+<div id="noti"></div>
+<div class="divCenter">
+    <div class="includeTop">
+        <div class="form-inline" role="form">
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail2">Userid address</label>
+            <input type="text" id="userid" class="form-control" id="exampleInputEmail2" placeholder="Userid">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputPassword2">Password</label>
+            <input type="password" id="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+          </div>
+          
+          <button class="btn btn-primary btn-sm" onclick="login()">+Login</button>
+        </div>
+        
+    </div>
+</div>
+<br>
+<br>
+<div class="divCenter">
+    <p><img src="img/copyright.png" height="22" alt="Copyright ⓒ Kiwiple inc."></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.3.1/jquery.cookie.min.js"></script>
+<script src="javascripts/vendor.js"></script>
+</body>
+</html>

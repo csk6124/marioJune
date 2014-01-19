@@ -1,0 +1,19 @@
+<li class="media">
+    <a class="pull-left" href="#">
+      <img src="{{image}}" height="100">
+    </a>
+    <div class="media-body">
+      <h4 class="media-heading">{{name}} <a href="#">Map</a></h4>
+      <p class="item-description">Category : {{category_id}}</a>
+      <p class="item-description">Description : {{description}}</p>
+      <p class="item-description">Lat : {{loc.lat}}</p>
+      <p class="item-description">Long : {{loc.long}}</p>
+      {{#if editor}}
+        <div id="map_canvas"></div>
+        <p class="item-description"><button id="close">close</button></p>
+      {{else}}
+        <p class="item-description"><button id="more">more</button></p>
+      {{/if}}
+    </div>
+</li>
+<hr>

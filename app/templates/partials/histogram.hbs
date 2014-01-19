@@ -1,0 +1,57 @@
+<div id="pad-wrapper">
+
+    <!-- statistics chart built with jQuery Flot -->
+    <div class="row chart">
+        <div class="col-md-12">
+            <h4 class="clearfix">
+                {{title}}
+            </h4>
+        </div>
+
+        <!-- form custom menu //-->
+        <div class="form-inline">
+                <div class="form-group">
+                        <span>View Type</span> 
+                        <div class="form-control">
+                            <input type="checkbox" name="bars" {{checked opt.bars}}> Bar
+                            <input type="checkbox" name="lines" {{checked opt.lines}}> Line
+                            <input type="checkbox" name="points" {{checked opt.points}}> Point
+                        </div>
+                </div>
+                <div class="form-group">
+                        <span>Interval</span> 
+                        <select class="form-control" id="selectInterval">
+                            {{#each opt.intervals}}
+                            <option value="{{this}}" {{selected this}}>{{this}}</option>
+                            {{/each}}
+                        </select>
+                </div>
+                <div class="form-group">
+                        <span>From</span> 
+                        <input class="form-control" type="text" id="dateinput_from" data-date-format="yyyy/mm/dd">
+                </div>
+                <div class="form-group">
+                        <span>To</span> 
+                        <input class="form-control" type="text" id="dateinput_to" data-date-format="yyyy/mm/dd">
+                </div>
+                <div class="form-group">
+                        <span>Query</span>
+                        <input class="form-control" type="text" id="query" placeholder="*"  value="*" />
+                </div>
+                <div class="form-group">
+                        <span>&nbsp</span>
+                        <button id="go" class="form-control btn-flat gray">+GO</button>    
+                </div>
+            </div>
+        </div>
+        <!-- chart //-->
+        <div class="col-md-12">
+            <div id="{{div}}"></div>
+        </div>
+        <br>
+
+        
+    </div>
+    <!-- end statistics chart -->
+
+</div>

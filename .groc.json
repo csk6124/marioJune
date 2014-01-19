@@ -1,0 +1,9 @@
+{
+  "glob": [
+  	"app/scripts/**/*.coffee",
+  	"README.md"
+  ],
+  "except": [],
+  "github": false,
+  "out": "./docs"
+}
