@@ -1,7 +1,6 @@
 # **도움말**
 
-master
-
+master good
 ----
 ## Version 0.1.0 
 * 오류 
